@@ -290,8 +290,7 @@
    [windowID _uint32]
    [state _uint8]
    [repeat _uint8]
-   [padding2 _uint8]
-   [padding3 _uint8]))
+   [keysym _SDL_Keysym]))
 
 (define-cstruct _SDL_TextEditingEvent
   ([type _uint32]

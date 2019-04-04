@@ -1,6 +1,6 @@
 
 #lang racket
-(require  
+(require
   ffi/unsafe
   ffi/unsafe/define
   ffi/cvector
@@ -119,7 +119,7 @@
 ;SDL_Blend.h
 
 (define _SDL_BlendMode
-  (_enum 
+  (_enum
    '(SDL_BLENDMODE_NONE = #x00000000
      SDL_BLENDMODE_BLEND = #x00000001
      SDL_BLENDMODE_ADD = #x00000002
@@ -142,23 +142,37 @@
 (define SDL_WINDOWPOS_CENTERED (SDL_WINDOWPOS_CENTERED_DISPLAY 0))
 (define (SDL_WINDOWPOS_ISCENTERED x)
   (equal? (bitwise-and x #xFFFF0000) SDL_WINDOWPOS_CENTERED_MASK))
- 
+
+
+(define SDL_WINDOW_FULLSCREEN #x00000001)    ; /**< fullscreen window */
+(define SDL_WINDOW_OPENGL #x00000002)        ; /**< window usable with OpenGL context */
+(define SDL_WINDOW_SHOWN #x00000004)         ; /**< window is visible */
+(define SDL_WINDOW_HIDDEN #x00000008)        ; /**< window is not visible */
+(define SDL_WINDOW_BORDERLESS #x00000010)    ; /**< no window decoration */
+(define SDL_WINDOW_RESIZABLE #x00000020)     ; /**< window can be resized */
+(define SDL_WINDOW_MINIMIZED #x00000040)     ; /**< window is minimized */
+(define SDL_WINDOW_MAXIMIZED #x00000080)     ; /**< window is maximized */
+(define SDL_WINDOW_INPUT_GRABBED #x00000100) ; /**< window has grabbed input focus */
+(define SDL_WINDOW_INPUT_FOCUS #x00000200)   ; /**< window has input focus */
+(define SDL_WINDOW_MOUSE_FOCUS #x00000400)   ; /**< window has mouse focus */
+(define SDL_WINDOW_FULLSCREEN_DESKTOP (bitwise-ior #x00000001 #x00001000))
+(define SDL_WINDOW_FOREIGN #x00000800)
 
 (define _SDL_WindowFlags
   (_enum
-   `(SDL_WINDOW_FULLSCREEN = #x00000001;        /**< fullscreen window */
-    SDL_WINDOW_OPENGL = #x00000002     ;        /**< window usable with OpenGL context */
-    SDL_WINDOW_SHOWN = #x00000004      ;        /**< window is visible */
-    SDL_WINDOW_HIDDEN = #x00000008     ;        /**< window is not visible */
-    SDL_WINDOW_BORDERLESS = #x00000010 ;        /**< no window decoration */
-    SDL_WINDOW_RESIZABLE = #x00000020  ;        /**< window can be resized */
-    SDL_WINDOW_MINIMIZED = #x00000040  ;        /**< window is minimized */
-    SDL_WINDOW_MAXIMIZED = #x00000080  ;        /**< window is maximized */
-    SDL_WINDOW_INPUT_GRABBED = #x00000100;      /**< window has grabbed input focus */
-    SDL_WINDOW_INPUT_FOCUS = #x00000200;        /**< window has input focus */
-    SDL_WINDOW_MOUSE_FOCUS = #x00000400;        /**< window has mouse focus */
-    SDL_WINDOW_FULLSCREEN_DESKTOP = ,(bitwise-ior #x00000001 #x00001000 )
-    SDL_WINDOW_FOREIGN = #x00000800)))
+   `(SDL_WINDOW_FULLSCREEN = ,SDL_WINDOW_FULLSCREEN
+    SDL_WINDOW_OPENGL = ,SDL_WINDOW_OPENGL
+    SDL_WINDOW_SHOWN = ,SDL_WINDOW_SHOWN
+    SDL_WINDOW_HIDDEN = ,SDL_WINDOW_HIDDEN
+    SDL_WINDOW_BORDERLESS = ,SDL_WINDOW_BORDERLESS
+    SDL_WINDOW_RESIZABLE = ,SDL_WINDOW_RESIZABLE
+    SDL_WINDOW_MINIMIZED = ,SDL_WINDOW_MINIMIZED
+    SDL_WINDOW_MAXIMIZED = ,SDL_WINDOW_MAXIMIZED
+    SDL_WINDOW_INPUT_GRABBED = ,SDL_WINDOW_INPUT_GRABBED
+    SDL_WINDOW_INPUT_FOCUS = ,SDL_WINDOW_INPUT_FOCUS
+    SDL_WINDOW_MOUSE_FOCUS = ,SDL_WINDOW_MOUSE_FOCUS
+    SDL_WINDOW_FULLSCREEN_DESKTOP = ,SDL_WINDOW_FULLSCREEN_DESKTOP
+    SDL_WINDOW_FOREIGN = ,SDL_WINDOW_FOREIGN)))
 
 (define _SDL_WindowEventID
   (_enum
@@ -790,18 +804,18 @@
 
 (define _SDL_SystemCursor
   (_enum
-   '(SDL_SYSTEM_CURSOR_ARROW    
-     SDL_SYSTEM_CURSOR_IBEAM    
-     SDL_SYSTEM_CURSOR_WAIT     
+   '(SDL_SYSTEM_CURSOR_ARROW
+     SDL_SYSTEM_CURSOR_IBEAM
+     SDL_SYSTEM_CURSOR_WAIT
      SDL_SYSTEM_CURSOR_CROSSHAIR
      SDL_SYSTEM_CURSOR_WAITARROW
-     SDL_SYSTEM_CURSOR_SIZENWSE 
-     SDL_SYSTEM_CURSOR_SIZENESW 
-     SDL_SYSTEM_CURSOR_SIZEWE   
-     SDL_SYSTEM_CURSOR_SIZENS   
-     SDL_SYSTEM_CURSOR_SIZEALL  
-     SDL_SYSTEM_CURSOR_NO       
-     SDL_SYSTEM_CURSOR_HAND     
+     SDL_SYSTEM_CURSOR_SIZENWSE
+     SDL_SYSTEM_CURSOR_SIZENESW
+     SDL_SYSTEM_CURSOR_SIZEWE
+     SDL_SYSTEM_CURSOR_SIZENS
+     SDL_SYSTEM_CURSOR_SIZEALL
+     SDL_SYSTEM_CURSOR_NO
+     SDL_SYSTEM_CURSOR_HAND
      SDL_NUM_SYSTEM_CURSORS)))
 
 
@@ -874,7 +888,7 @@
 
 (define _SDL_EventType
   (_enum
-   '(SDL_FIRSTEVENT     = 0
+   '(SDL_FIRSTEVENT    = 0
     SDL_QUIT           = #x100
     SDL_APP_TERMINATING
     SDL_APP_LOWMEMORY
